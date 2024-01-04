@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #container {
+      position: relative;
+    }
+
+    #data-table {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    #data-table table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    #data-table th, #data-table td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+
+    #data-table th {
+      background-color: #f2f2f2;
+    }
+
+    #edit-btn, #save-btn {
+      margin-top: 10px;
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+  </style>
+  <title>Image with Editable Table</title>
+</head>
+<body>
+  <div id="container">
+    <img src="https://bansaltmtsariya.com/Price-Today_new.jpg" alt="Your Image" width="500">
+    <div id="data-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Column 1</th>
+            <th>Column 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td contenteditable="false">Data 1</td>
+            <td contenteditable="false">Data 2</td>
+          </tr>
+          <tr>
+            <td contenteditable="false">Data 3</td>
+            <td contenteditable="false">Data 4</td>
+          </tr>
+          <tr>
+            <td contenteditable="false">Data 5</td>
+            <td contenteditable="false">Data 6</td>
+          </tr>
+        </tbody>
+      </table>
+      <button id="edit-btn" onclick="enableEditing()">Edit</button>
+      <button id="save-btn" onclick="saveData()" style="display:none;">Save</button>
+    </div>
+  </div>
+
+  <script>
+    let isEditing = false;
+
+    function enableEditing() {
+      const cells = document.querySelectorAll('#data-table td[contenteditable="false"]');
+      cells.forEach(cell => {
+        cell.contentEditable = true;
+      });
+
+      document.getElementById('edit-btn').style.display = 'none';
+      document.getElementById('save-btn').style.display = 'block';
+
+      isEditing = true;
+    }
+
+    function saveData() {
+      const cells = document.querySelectorAll('#data-table td[contenteditable="true"]');
+      cells.forEach(cell => {
+        cell.contentEditable = false;
+      });
+
+      document.getElementById('edit-btn').style.display = 'block';
+      document.getElementById('save-btn').style.display = 'none';
+
+      isEditing = false;
+    }
+  </script>
+</body>
+</html>
